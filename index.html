@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iqra Tabassum — ML/AI Researcher & Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F6F4;
+    --paper-dim:#EDEFEC;
+    --ink:#14181C;
+    --muted:#5B6570;
+    --line:#D8DCDE;
+    --signal:#0F8B8D;
+    --signal-dim:#0F8B8D22;
+    --alert:#E4572E;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  ::selection{background:var(--signal-dim);color:var(--ink);}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px;}
+
+  a{color:var(--signal);text-decoration:none;border-bottom:1px solid transparent;}
+  a:hover{border-bottom-color:var(--signal);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(245,246,244,.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:56px;
+  }
+  nav .brand{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink);}
+  nav .brand::before{content:"◍  ";color:var(--signal);}
+  nav ul{list-style:none;display:flex;gap:26px;margin:0;padding:0;flex-wrap:wrap;}
+  nav a{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--muted);border-bottom:none;
+  }
+  nav a:hover{color:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:76px 0 40px;}
+  .hero-top{display:flex;justify-content:space-between;gap:40px;align-items:flex-start;flex-wrap:wrap;}
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(40px,7vw,68px);
+    line-height:1.02;
+    margin:0 0 10px;
+    letter-spacing:-.01em;
+  }
+  .hero .role{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;color:var(--signal);
+    margin-bottom:22px;
+  }
+  .hero p.lede{
+    max-width:60ch;
+    font-size:16.5px;color:var(--muted);
+    margin:0 0 8px;
+  }
+  .profile-photo{
+    width:132px;height:158px;
+    object-fit:cover;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    flex-shrink:0;
+  }
+  @media (max-width:640px){
+    .profile-photo{width:100px;height:120px;}
+  }
+
+  /* ---------- SIGNAL WAVEFORM (signature element) ---------- */
+  .waveform{
+    margin:34px 0 6px;
+    position:relative;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:14px 0;
+  }
+  .waveform svg{display:block;width:100%;height:70px;}
+  .wf-line{
+    fill:none;
+    stroke:var(--muted);
+    stroke-width:1.4;
+    opacity:.55;
+  }
+  .wf-anomaly{
+    fill:none;
+    stroke:var(--alert);
+    stroke-width:2;
+    stroke-dasharray:640;
+    stroke-dashoffset:640;
+    animation:trace 4.5s ease-in-out infinite;
+  }
+  @keyframes trace{
+    0%{stroke-dashoffset:640;}
+    55%{stroke-dashoffset:0;}
+    100%{stroke-dashoffset:0;}
+  }
+  .wf-tag{
+    position:absolute;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    color:var(--alert);
+    letter-spacing:.06em;
+    opacity:0;
+    animation:tagIn 4.5s ease-in-out infinite;
+  }
+  @keyframes tagIn{
+    0%,50%{opacity:0;transform:translateY(3px);}
+    62%,90%{opacity:1;transform:translateY(0);}
+    100%{opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .wf-anomaly{animation:none;stroke-dashoffset:0;}
+    .wf-tag{animation:none;opacity:1;}
+  }
+  .wf-caption{
+    display:flex;justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;color:var(--muted);
+    margin-top:6px;
+  }
+
+  .contact-row{
+    margin-top:22px;
+    display:flex;flex-wrap:wrap;
+    gap:18px 24px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+  }
+  .contact-row span.static{color:var(--muted);}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:44px 0;border-top:1px solid var(--line);}
+  section h2{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:26px;
+    margin:0 0 26px;
+  }
+
+  .grid-two{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  @media (max-width:720px){.grid-two{grid-template-columns:1fr;}}
+
+  .entry{margin-bottom:22px;}
+  .entry:last-child{margin-bottom:0;}
+  .entry .row{display:flex;justify-content:space-between;gap:14px;align-items:baseline;}
+  .entry h3{font-size:15.5px;font-weight:600;margin:0;}
+  .entry .org{color:var(--muted);font-size:13.5px;margin:2px 0 0;}
+  .entry .date{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;color:var(--muted);
+    white-space:nowrap;
+  }
+  .entry .desc{font-size:13.5px;color:var(--muted);margin:6px 0 0;}
+  .entry ul.bullets{margin:8px 0 0;padding-left:18px;}
+  .entry ul.bullets li{font-size:13.5px;color:var(--muted);margin-bottom:5px;}
+
+  .badge{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    color:var(--signal);
+    border:1px solid var(--signal);
+    border-radius:20px;
+    padding:2px 9px;
+    margin:2px 6px 2px 0;
+  }
+
+  /* Publication */
+  .pub{
+    border-left:2px solid var(--signal);
+    padding:4px 0 4px 18px;
+  }
+  .pub .venue{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--signal);letter-spacing:.06em;text-transform:uppercase;}
+  .pub h3{font-family:'Fraunces',serif;font-weight:500;font-size:19px;margin:6px 0 8px;line-height:1.3;}
+  .pub .authors{font-size:13px;color:var(--muted);margin:0 0 10px;}
+  .pub .stats{display:flex;flex-wrap:wrap;gap:18px;margin-top:10px;}
+  .pub .stat{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink);}
+  .pub .stat b{color:var(--signal);display:block;font-size:16px;}
+  .pub .links{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:12px;}
+  .pub .links a{margin-right:16px;}
+
+  /* Projects */
+  .project{
+    padding:22px 0;
+    border-top:1px solid var(--line);
+  }
+  .project:first-child{border-top:none;padding-top:0;}
+  .project .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline;}
+  .project h3{font-size:17px;margin:0;font-weight:600;}
+  .project p{font-size:13.5px;color:var(--muted);margin:8px 0 10px;max-width:70ch;}
+  .stack{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+  .stack span{color:var(--ink);}
+  .project .links{margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;}
+  .project .links a{margin-right:16px;}
+
+  /* Skills */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 40px;}
+  @media (max-width:640px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-row{padding:10px 0;border-bottom:1px solid var(--line);}
+  .skill-row .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--signal);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:3px;}
+  .skill-row .val{font-size:13.5px;color:var(--ink);}
+
+  footer{
+    padding:30px 0 60px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    color:var(--muted);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">iqra</div>
+    <ul>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#work">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#other-experience">Other</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div>
+        <p class="eyebrow">ML / AI Research &amp; Software Engineering</p>
+        <h1>Iqra Tabassum</h1>
+        <p class="role">Anomaly detection · real-time signal monitoring · applied ML systems</p>
+        <p class="lede">I completed my Master's in Computer Science and Engineering at SunMoon University, South Korea, advised by Prof. Taek Lee. My research on wearable-sensor anomaly detection was published in KICS 2026 (Scopus-indexed). I'm currently open to opportunities in ML/AI research and software engineering — if you're working on something interesting or hiring, feel free to reach out.</p>
+      </div>
+      <img class="profile-photo" src="assets/iqra-pic.JPG" alt="Iqra Tabassum">
+    </div>
+
+    <div class="waveform" aria-hidden="true">
+      <svg viewBox="0 0 900 70" preserveAspectRatio="none">
+        <path class="wf-line" d="M0,35 L120,35 L134,15 L148,55 L162,35 L900,35" />
+        <path class="wf-anomaly" d="M560,35 L586,35 L596,12 L606,58 L616,20 L626,35 L900,35" />
+      </svg>
+      <span class="wf-tag" style="left:60%;top:6px;">anomaly detected · risk flag raised</span>
+    </div>
+    <div class="wf-caption">
+      <span>heart-rate variability · sleep · activity — wearable stream</span>
+      <span>model: LSTM-Autoencoder w/ attention</span>
+    </div>
+
+    <div class="contact-row" id="contact">
+      <a href="mailto:iqratabassum622@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/iqra-tabassum-b6180021b" target="_blank">LinkedIn</a>
+      <a href="https://github.com/IQraTbsm" target="_blank">GitHub</a>
+      <a href="https://scholar.google.com/citations?user=_PLQqVsAAAAJ&hl=en" target="_blank">Google Scholar</a>
+      <a href="assets/Iqra_resume-R2026.pdf" target="_blank">CV</a>
+      <span class="static">+82 10 6575 6944</span>
+    </div>
+  </div>
+</header>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="entry">
+      <div class="row">
+        <h3>SunMoon University</h3>
+        <span class="date">03/2024 – 02/2026</span>
+      </div>
+      <p class="org">M.S. Computer Science and Engineering · Asan, South Korea</p>
+      <p class="desc">FinTech · Blockchain · Web Services · Information &amp; Data Management · Reinforcement Learning · Advanced Decision-Making Systems</p>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <h3>University of Engineering and Technology, Lahore</h3>
+        <span class="date">10/2018 – 11/2022</span>
+      </div>
+      <p class="org">B.S. Computer Science · Lahore, Pakistan</p>
+      <p class="desc">AI · Machine Learning · Computer Vision · Databases · Data Structures &amp; Algorithms · Web Technologies · Mobile App Development</p>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <h3>Honors &amp; Credentials</h3>
+      </div>
+      <p class="desc">Scopus-indexed publication, KICS 2026</p>
+      <p class="desc">Korean copyright registration — anomaly detection software tool</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <div class="entry">
+      <div class="row">
+        <h3>Research Assistant</h3>
+        <span class="date">03/2024 – 02/2026</span>
+      </div>
+      <p class="org">SunMoon University Research Lab · Asan, South Korea</p>
+      <ul class="bullets">
+        <li>
+          Built a real-time anomaly detection system for wearable sensor data, combining LSTM, 
+          Autoencoder, and ensemble ML models to flag clinical risk early — work later published in KICS 2026
+           and funded by Korea's Ministry of Health & Welfare (KHIDI).
+        </li>
+
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <h3>Software Engineer</h3>
+        <span class="date">07/2022 – 02/2024</span>
+      </div>
+      <p class="org">NetSol Technologies · Lahore, Pakistan</p>
+      <ul class="bullets">
+        <li>
+          Built and maintained backend systems for enterprise financial platforms, including 
+          workflows supporting Mercedes-Benz's leasing operations — from database design to production fixes and CI/CD.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <h2>Publications</h2>
+    <div class="pub">
+      <p class="venue">KICS 2026 · Scopus-indexed</p>
+      <h3>Unsupervised Anomaly Detection for Psychiatric Inpatients Using Wearable Sensor Data: A Real-Time Monitoring Framework for Clinical Risk Management</h3>
+      <p class="authors">Iqra Tabassum et al.</p>
+      <div class="stats">
+        <div class="stat"><b>75%</b>flagged anomalies matched clinician-assessed high-risk group</div>
+        <div class="stat"><b>0.74</b>AUC — best model, Autoencoder</div>
+        <div class="stat"><b>6–7×</b>improvement over dummy classifier</div>
+        <div class="stat"><b>+17%</b>F1 gain over baseline</div>
+      </div>
+      <div class="links">
+        <a href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12557030" target="_blank">Paper ↗</a>
+        <a href="https://huggingface.co/spaces/Iqratab/anomaly_detection_app" target="_blank">Live project ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+
+    <div class="project">
+      <div class="row">
+        <h3>Wearable Sensor Anomaly Detection</h3>
+        <span class="badge">deployed · Hugging Face Spaces</span>
+      </div>
+      <p>A Streamlit app that evaluates and compares anomaly-detection models on uploaded wearable sensor data, using ensemble voting across multiple ML/DL approaches.</p>
+      <div class="stack">stack — <span>Python · Scikit-learn · PyTorch/TensorFlow · Pandas · Streamlit</span></div>
+      <div class="links">
+        <a href="https://github.com/IQraTbsm" target="_blank">GitHub ↗</a>
+        <a href="https://huggingface.co/spaces/Iqratab/anomaly_detection_app" target="_blank">Live app ↗</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="row">
+        <h3>GPT-Style Transformer</h3>
+        <span class="badge">from first principles</span>
+      </div>
+      <p>Built a GPT-style transformer from scratch in PyTorch as a learning exercise: self-attention, causal masking, and all.</p>
+      <div class="stack">stack — <span>Python · PyTorch</span></div>
+      <div class="links">
+        <a href="https://github.com/IQraTbsm" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="row">
+        <h3>E-PLANNER — 2D &amp; 3D Home Designing</h3>
+        <span class="badge">final-year project</span>
+      </div>
+      <p>A web-based environment for interior and exterior building design, letting users create and plan building layouts in 2D and 3D.</p>
+      <div class="stack">stack — <span>React.js · JavaScript · HTML · CSS · Firebase</span></div>
+    </div>
+
+    <div class="project">
+      <div class="row">
+        <h3>E-Commerce Website</h3>
+      </div>
+      <p>Frontend for a wristwatch shop selling multiple brands, with a Python backend.</p>
+      <div class="stack">stack — <span>HTML · CSS · JavaScript · Python</span></div>
+      <div class="links">
+        <a href="https://github.com/IQraTbsm" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="label">ML / AI Frameworks</span>
+        <span class="val">PyTorch · TensorFlow · Scikit-learn · LSTM · Autoencoders · Anomaly Detection · LLMs</span>
+      </div>
+      <div class="skill-row">
+        <span class="label">Languages</span>
+        <span class="val">Python · JavaScript · SQL · React.js</span>
+      </div>
+      <div class="skill-row">
+        <span class="label">Research</span>
+        <span class="val">Supervised / Unsupervised Learning · Time-Series Analysis · Feature Engineering · Algorithm Design</span>
+      </div>
+      <div class="skill-row">
+        <span class="label">Data Engineering</span>
+        <span class="val">ETL Pipelines · Data Preprocessing · Signal Processing · Data Mining · Batch Processing</span>
+      </div>
+      <div class="skill-row">
+        <span class="label">Cloud &amp; DevOps</span>
+        <span class="val">Linux · CI/CD · Testing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="other-experience">
+  <div class="wrap">
+    <h2>Other Experience</h2>
+    <div class="entry">
+      <div class="row">
+        <h3>English Teacher / Language Assistant</h3>
+        <span class="date">05/2024 – 02/2026</span>
+      </div>
+      <p class="org">Samsung English Academy/  더상승영어학원 / Premium L Academy — South Korea</p>
+      <p class="desc">Part-time English teaching roles: elementary through high-school students, Tangjeong &amp; Baebang.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:10px;">
+    <span>© 2026 Iqra Tabassum</span>
+  </div>
+</footer>
+
+</body>
+</html>
